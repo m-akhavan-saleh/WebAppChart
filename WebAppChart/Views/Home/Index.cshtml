@@ -1,0 +1,270 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<script src="~/Scripts/Chart.min.js"></script>
+<script src="~/Scripts/utils.js"></script>
+
+<div class="panel panel-default">
+    <div class="row">
+        <div class="col-lg-4">
+            <div id="canvas-holder">
+                <canvas id="chart-area" style="font-family:Tahoma"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div id="canvas-holder">
+                <canvas id="chart-area-2" style="font-family:Tahoma"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div id="container">
+                <canvas id="canvas"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div id="container">
+                <canvas id="canvas-bar"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div id="canvas-holder">
+                <canvas id="chart-area-3" style="font-family:Tahoma"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div id="canvas-holder">
+                <canvas id="chart-area-4" style="font-family:Tahoma"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel panel-default" style="font-family:Tahoma; text-align:center">
+                <div class="panel-heading">گواهینامه</div>
+                <div class="panel-body" style="height:100px; font-size:36pt; color:blue;">C</div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div id="container" style="cursor:pointer;" onclick="location.href = 'http://www.google.com';">
+                <canvas id="canvas5"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default" style="font-family:Tahoma; text-align:center">
+                <div class="panel-heading">گرید</div>
+                <div class="panel-body" style="height:100px; font-size:24pt; color:blue;">ISO/TS 16949:2009</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+     document.getElementById("container").onclick = function () {
+        location.href = "http://www.google.com";
+    };
+
+    var randomScalingFactor = function () {
+        return Math.round(Math.random() * 100);
+    };
+
+    var config = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                //data: [15,23,47,15],
+                data : [@ViewBag.Data],
+                backgroundColor: [
+                    window.chartColors.red,
+                    window.chartColors.orange,
+                    window.chartColors.yellow,
+                    window.chartColors.green,
+                ],
+                label: 'درصد توقفات'
+            }],
+            labels: [
+                'تولید',
+                'ماشین',
+                'مواد',
+                'نیروی انسانی'
+            ]
+        },
+        options: {
+            responsive: true
+        }
+    };
+
+    var config4 = {
+        type: 'polarArea',
+        data: {
+            datasets: [{
+                //data: [15,23,47,15],
+                data : [@ViewBag.Data],
+                backgroundColor: [
+                    window.chartColors.red,
+                    window.chartColors.orange,
+                    window.chartColors.yellow,
+                    window.chartColors.green,
+                ],
+                label: 'درصد توقفات'
+            }],
+            labels: [
+                'تولید',
+                'ماشین',
+                'مواد',
+                'نیروی انسانی'
+            ]
+        },
+        options: {
+            responsive: true
+        }
+    };
+
+    var config3 = {
+        type: 'radar',
+        data: {
+            datasets: [{
+                //data: [15,23,47,15],
+                data : [@ViewBag.Data],
+                backgroundColor: [
+                    window.chartColors.red,
+                    window.chartColors.orange,
+                    window.chartColors.yellow,
+                    window.chartColors.green,
+                ],
+                label: 'درصد توقفات'
+            }],
+            labels: [
+                'تولید',
+                'ماشین',
+                'مواد',
+                'نیروی انسانی'
+            ]
+        },
+        options: {
+            responsive: true
+        }
+    };
+
+    var config2 = {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                //data: [15,23,47,15],
+                data : [@ViewBag.Data],
+                backgroundColor: [
+                    window.chartColors.red,
+                    window.chartColors.orange,
+                    window.chartColors.yellow,
+                    window.chartColors.green,
+                ],
+                label: 'درصد توقفات'
+            }],
+            labels: [
+                'تولید',
+                'ماشین',
+                'مواد',
+                'نیروی انسانی'
+            ]
+        },
+        options: {
+            responsive: true
+        }
+    };
+
+    var MONTHS = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+    var color = Chart.helpers.color;
+    var barChartData = {
+        labels: ['مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
+        datasets: [{
+            label: 'ضایعات',
+            fill:false,
+            backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+            borderColor: window.chartColors.red,
+            borderWidth: 1,
+            data: [1.0, -5.5, 10, 6, 5, 3.5, -1.5]
+        }]
+    };
+
+    var barChartData5 = {
+        labels: ['مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
+        datasets: [{
+            label: 'تولید',
+            fill: true,
+            backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+            borderColor: window.chartColors.red,
+            borderWidth: 1,
+            data: [1.0, -5.5, 10, 6, 5, 3.5, -1.5]
+        }]
+    };
+
+
+    window.onload = function () {
+        var ctx = document.getElementById('chart-area').getContext('2d');
+        window.myPie = new Chart(ctx, config);
+
+        var ctx = document.getElementById('chart-area-2').getContext('2d');
+        window.myPie = new Chart(ctx, config2);
+
+        var ctx = document.getElementById('chart-area-3').getContext('2d');
+        window.myPie = new Chart(ctx, config3);
+
+        var ctx = document.getElementById('chart-area-4').getContext('2d');
+        window.myPie = new Chart(ctx, config4);
+
+        var ctx = document.getElementById('canvas').getContext('2d');
+        window.myBar = new Chart(ctx, {
+            type: 'line',
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                fill : false,
+                title: {
+                    display: true,
+                    text: 'نمودار روند ضایعات'
+                }
+            }
+        });
+
+         var ctx = document.getElementById('canvas5').getContext('2d');
+        window.myBar = new Chart(ctx, {
+            type: 'line',
+            data: barChartData5,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'نمودار روند تولید'
+                }
+            }
+        });
+
+        var ctx = document.getElementById('canvas-bar').getContext('2d');
+        window.myBar = new Chart(ctx, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                fill : false,
+                title: {
+                    display: true,
+                    text: 'نمودار روند ضایعات'
+                }
+            }
+        });
+
+    };
+
+</script>

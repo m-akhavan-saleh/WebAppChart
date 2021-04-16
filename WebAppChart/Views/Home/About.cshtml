@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+<script src="~/Scripts/Chart.min.js"></script>
+<script src="~/Scripts/utils.js"></script>
+<div id="container" style="width: 75%; font-family:Tahoma;">
+    <canvas id="canvas" style=" font-family:Tahoma;"></canvas>
+</div>
+
+<script>
+    var MONTHS = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+    var color = Chart.helpers.color;
+    var barChartData = {
+        labels: ['مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
+        datasets: [{
+            label: 'ضایعات',
+            fill:false,
+            backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+            borderColor: window.chartColors.red,
+            borderWidth: 1,
+            data: [1.0, -5.5, 10, 6, 5, 3.5, -1.5]
+        }]
+
+    };
+
+    window.onload = function () {
+        var ctx = document.getElementById('canvas').getContext('2d');
+        window.myBar = new Chart(ctx, {
+            type: 'line',
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                fill : false,
+                title: {
+                    display: true,
+                    text: 'نمودار روند ضایعات'
+                }
+            }
+        });
+
+    };
+
+</script>
